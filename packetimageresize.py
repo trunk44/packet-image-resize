@@ -41,8 +41,8 @@ def resize():
                         pass
                     
                     else:
-                        hpercent = (PORT/float(height))
-                        hsize = int((float(width)*float(hpercent)))
+                        wpercent = (PORT/float(height))
+                        hsize = int((float(width)*float(wpercent)))
                         img = img.resize((hsize,PORT))
                         img.save(file, exif=exif)
                         i += 1
