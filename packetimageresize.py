@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # Пакетное сжатие изображений, сжимает все изображения в каталоге,
 # в котором запущен скрипт, и в его подкаталогах рекурсивно,
-# до регулируемых значений, уменьшая разрешение фото.
+# до указанных значений, уменьшая разрешение фото, применяется antialiasing.
 
 from PIL import Image, ExifTags
 import glob, os
@@ -43,17 +43,17 @@ def resize():
                     else:
                         wpercent = (PORT/float(height))
                         hsize = int((float(width)*float(wpercent)))
-                        img = img.resize((hsize,PORT))
+                        img = img.resize((hsize,PORT), Image.ANTIALIAS)
                         img.save(file, exif=exif)
                         i += 1
                         n += 1
-                        print('usable portrait, processing file:', file , width, 'x', height, format, 'compressed to:', wsize, 'x', LAND)          
+                        print('usable portrait, processing file:', file , width, 'x', height, format, 'compressed to:', hsize, 'x', LAND)          
          
                 else:
                     if width > PANORAMA:
                         wpercent = (PANORAMA/float(width))
                         hsize = int((float(height)*float(wpercent)))
-                        img = img.resize((PANORAMA,hsize))
+                        img = img.resize((PANORAMA,hsize), Image.ANTIALIAS)
                         img.save(file, exif=exif)
                         i += 1
                         n += 1
@@ -73,7 +73,7 @@ def resize():
                             else:
                                 wpercent = (LAND/float(width))
                                 hsize = int((float(height)*float(wpercent)))
-                                img = img.resize((LAND,hsize))
+                                img = img.resize((LAND,hsize), Image.ANTIALIAS)
                                 img.save(file, exif=exif)
                                 i += 1
                                 n += 1
