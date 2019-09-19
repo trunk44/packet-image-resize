@@ -1,1 +1,1 @@
-# packet-image-resize
+# pybricks
