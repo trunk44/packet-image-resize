@@ -28,7 +28,7 @@ def cls():
 def resize():
     i = 0
     n = 0
-    sumsizes = 0
+
     cls()
     files = glob.glob(dir_path + '/**/*.*', recursive=True)
     for file in files:
