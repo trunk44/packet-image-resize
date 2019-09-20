@@ -20,15 +20,14 @@ def fn(infile):
     if Image:
             try:
                 im = Image.open(infile)
+                outfile = os.path.splitext(infile)[0] + ".thumbnail"
                 try:
                     im.info['exif']
                     im.thumbnail(size, Image.ANTIALIAS)
-                    outfile = os.path.splitext(infile)[0] + ".thumbnail"
                     im.save(outfile, "JPEG", exif=im.info['exif'])
-                    print("thumb", infile, "created: jpg")
+                    print("thumb", infile, "created:j")
                 except:
                     im.thumbnail(size, Image.ANTIALIAS)
-                    outfile = os.path.splitext(infile)[0] + ".thumbnail"
                     im.save(outfile, "PNG")
                     print("thumb", infile, "created: png")
             except IOError:
@@ -39,7 +38,7 @@ def fn(infile):
              
 if __name__ == '__main__':
     cpucores = multiprocessing.cpu_count()
-    files = glob.glob(dir_path + '/1/**/*.*', recursive=True)
+    files = glob.glob(dir_path + '/**/*.*', recursive=True)
     startTime = datetime.now().replace(microsecond=0)
     pool = Pool(processes=cpucores + 1)
     pool.map(fn, files)
